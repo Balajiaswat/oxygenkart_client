@@ -27,7 +27,7 @@ function Navbar({ courseRef, contactUsRef, intradayRef, homeRef }) {
   const fetchUser = async () => {
     try {
       const response = await fetch(
-        `https://oxy-admin-backend.onrender.com/user/getuser`,
+        `https://oxygenkart-backend.onrender.com/user/getuser`,
         {
           method: "GET",
           headers: {
@@ -48,7 +48,7 @@ function Navbar({ courseRef, contactUsRef, intradayRef, homeRef }) {
   const fetchMessages = async () => {
     try {
       const response = await fetch(
-        `https://oxy-admin-backend.onrender.com/message/get`
+        `https://oxygenkart-backend.onrender.com/message/get`
       );
 
       if (response.ok) {
@@ -104,7 +104,7 @@ function Navbar({ courseRef, contactUsRef, intradayRef, homeRef }) {
       }
 
       const response = await fetch(
-        `https://oxy-admin-backend.onrender.com/user/logout`,
+        `https://oxygenkart-backend.onrender.com/user/logout`,
         {
           method: "GET",
           headers: {

@@ -39,7 +39,7 @@ function Homescreen() {
     }
     try {
       const response = await fetch(
-        `https://oxy-admin-backend.onrender.com/courseOrder/buy/${courseId}`,
+        `https://oxygenkart-backend.onrender.com/courseOrder/buy/${courseId}`,
         {
           method: "POST",
           headers: {
@@ -65,7 +65,7 @@ function Homescreen() {
       // const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "https://oxy-admin-backend.onrender.com/course/get",
+        "https://oxygenkart-backend.onrender.com/course/get",
         {
           // headers: {
           //   Authorization: token,

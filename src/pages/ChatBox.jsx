@@ -60,7 +60,7 @@ function ChatBox({ showChatBox, setShowChatBox, toggleChatBox }) {
 
     try {
       const response = await fetch(
-        `https://oxy-admin-backend.onrender.com/message/getwithtime`
+        `https://oxygenkart-backend.onrender.com/message/getwithtime`
       );
 
       if (response.ok) {
@@ -105,7 +105,7 @@ function ChatBox({ showChatBox, setShowChatBox, toggleChatBox }) {
   const fetchNotification = async () => {
     try {
       const response = await fetch(
-        `https://oxy-admin-backend.onrender.com/notification/getlatest`,
+        `https://oxygenkart-backend.onrender.com/notification/getlatest`,
         {
           method: "GET",
           headers: {
@@ -144,7 +144,7 @@ function ChatBox({ showChatBox, setShowChatBox, toggleChatBox }) {
   const fetchUser = async () => {
     try {
       const response = await fetch(
-        `https://oxy-admin-backend.onrender.com/user/getuser`,
+        `https://oxygenkart-backend.onrender.com/user/getuser`,
         {
           method: "GET",
           headers: {

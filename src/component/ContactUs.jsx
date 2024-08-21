@@ -41,7 +41,7 @@ function ContactUs({ contactUsRef }) {
       setLoading(true);
       try {
         const response = await fetch(
-          "https://oxy-admin-backend.onrender.com/contactus/send",
+          "https://oxygenkart-backend.onrender.com/contactus/send",
           {
             method: "POST",
             headers: {

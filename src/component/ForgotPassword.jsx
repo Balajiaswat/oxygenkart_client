@@ -17,7 +17,7 @@ function ForgotPassword() {
 
     try {
       const response = await fetch(
-        `https://oxy-admin-backend.onrender.com/user/getuserbyemail`,
+        `https://oxygenkart-backend.onrender.com/user/getuserbyemail`,
         {
           method: "POST",
           headers: {
