@@ -29,9 +29,6 @@ function Footer() {
                 <NavLink className="footer-link" to="/termandcondition">
                   Terms
                 </NavLink>
-                <NavLink className="footer-link" to="/termandcondition">
-                  Terms
-                </NavLink>
                 <NavLink className="footer-link" to="/privacy">
                   Privacy
                 </NavLink>
