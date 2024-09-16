@@ -10,6 +10,7 @@ import About from "./pages/About";
 import Chck from "./pages/Chck";
 import ForgotPassword from "./component/ForgotPassword";
 import ResetPassword from "./component/ResetPassword";
+import Privacy from "./component/Privacy";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/termandcondition" element={<TermsAndConditions />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/aboutus" element={<About />} />
           <Route path="/not" element={<Chck />} />

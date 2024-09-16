@@ -29,8 +29,11 @@ function Footer() {
                 <NavLink className="footer-link" to="/termandcondition">
                   Terms
                 </NavLink>
-                <NavLink className="footer-link" to="/faqs">
-                  FAQs
+                <NavLink className="footer-link" to="/termandcondition">
+                  Terms
+                </NavLink>
+                <NavLink className="footer-link" to="/privacy">
+                  Privacy
                 </NavLink>
                 <a className="footer-link">
                   @ 2024 Oxygenkart.com All rights reserved.
