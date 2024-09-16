@@ -35,15 +35,35 @@ const FAQs = () => {
         "OxygenKart is a platform that provides trading signals and courses to help you start day trading.",
     },
     {
-      question: "How accurate are the trading signals?",
+      question: "What data does OxygenKart collect?",
       answer:
-        "Our signals are highly accurate, but market behavior can be unpredictable. Always trade with caution.",
+        "We collect your name, email, and mobile number only if you choose to download our training material. This helps us assist you in case of any technical issues.",
     },
     {
-      question: "How can I contact customer support?",
-      answer: "You can contact our customer support at support@oxygenkart.com.",
+      question: "How do you use my personal data?",
+      answer:
+        "Your data is stored securely on our cloud-based server and is never shared with third parties. We may use your contact details to notify you about new products or services in the future.",
     },
-    // Add more FAQs as needed
+    {
+      question: "Is OxygenKart SEBI registered?",
+      answer:
+        "No, OxygenKart is not a SEBI registered company. We are a team of experienced traders sharing our trading knowledge with the people of India.",
+    },
+    {
+      question: "Do you guarantee profits from trading signals?",
+      answer:
+        "No. Even experienced day traders can incur losses. OxygenKart and its members are not responsible for any losses based on buy/sell signals provided.",
+    },
+    {
+      question: "Is there a refund policy for daily signals?",
+      answer:
+        "No, we do not offer refunds for the daily intraday trading signal service.",
+    },
+    {
+      question: "Can I get a refund for training material?",
+      answer:
+        "A refund for training material is only applicable if there is a technical glitch in delivering the access link to your email, and only if your provided contact details are accurate and active.",
+    },
   ];
 
   return (
