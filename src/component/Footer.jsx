@@ -16,8 +16,8 @@ function Footer() {
               className="footer-logo"
             />
             <div className="footer-contact">
-              <p>support@oxygenkart.com</p>
               <p>3rd cross, Ramurthynagar Bangalore -560016</p>
+              <p>support@oxygenkart.com</p>
             </div>
           </div>
           <div className="footer-links">

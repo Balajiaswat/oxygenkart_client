@@ -1,8 +1,9 @@
 import React from "react";
+import "./Privacy.css"; // Import the CSS file
 
 const Privacy = () => {
   return (
-    <div>
+    <div className="terms-container">
       <h1>Privacy Policy</h1>
       <h2>1. Data Collection</h2>
       <p>
