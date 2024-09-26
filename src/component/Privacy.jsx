@@ -38,7 +38,8 @@ const Privacy = () => {
           published on our website.
         </p>
 
-        <h2>5. Refund Policy (4-5 business days)</h2>
+        <h2>5. Refund Policy</h2>
+
         <p>
           <strong>Daily Signals:</strong> No refunds are offered for the daily
           intraday trading signal service.
@@ -57,6 +58,7 @@ const Privacy = () => {
             accurate and active.
           </li>
         </ul>
+        <p>Refunds will be processed within 4-5 business days.</p>
       </div>
     </>
   );

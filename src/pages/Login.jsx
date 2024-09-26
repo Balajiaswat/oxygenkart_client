@@ -10,6 +10,7 @@ import {
   FaEyeSlash,
   FaEye,
 } from "react-icons/fa";
+import { authWithGoogle } from "../firebase";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -65,6 +66,38 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin({ email, password });
+  };
+
+  const handleGoogleAuth = async (e) => {
+    e.preventDefault();
+
+    try {
+      const user = await authWithGoogle();
+
+      // Create the form data with the user's access token
+      const formData = {
+        access_token: user.accessToken,
+      };
+
+      // Make the POST request to your backend
+      const res = await fetch("http://localhost:8080/user/google-auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      // Handle the response
+      const data = await res.json();
+      if (res.ok) {
+        console.log("Login successful:", data);
+      } else {
+        console.log("Failed to authenticate:", data);
+      }
+    } catch (err) {
+      console.log("Trouble logging into Google", err);
+    }
   };
 
   return (
@@ -135,9 +168,12 @@ const Login = () => {
                   <button type="submit" disabled={loading}>
                     {loading ? "Signing In" : "Sign In"}
                   </button>
-                  {/* <p>or sign in with</p>
+                  <p>or sign in with</p>
                   <div className="social-login">
-                    <button className="social-button google">
+                    <button
+                      className="social-button google"
+                      onClick={handleGoogleAuth}
+                    >
                       <FaGoogle />
                     </button>
                     <button className="social-button facebook">
@@ -146,7 +182,7 @@ const Login = () => {
                     <button className="social-button apple">
                       <FaApple />
                     </button>
-                  </div> */}
+                  </div>
                 </div>
               </form>
             </div>
