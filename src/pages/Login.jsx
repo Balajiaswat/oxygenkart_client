@@ -80,18 +80,28 @@ const Login = () => {
       };
 
       // Make the POST request to your backend
-      const res = await fetch("http://localhost:8080/user/google-auth", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        "https://oxygenkart-backend.onrender.com/user/google-auth",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       // Handle the response
       const data = await res.json();
       if (res.ok) {
         console.log("Login successful:", data);
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("token", user.accessToken); // Assuming the token is in responseData
+        localStorage.setItem("userId", data._id); // Assuming userId is available as '_id'
+        localStorage.setItem("username", data.username); // Assuming username is available
+
+        // Optional: Redirect to the homepage or a different page
+        window.location.href = "/";
       } else {
         console.log("Failed to authenticate:", data);
       }

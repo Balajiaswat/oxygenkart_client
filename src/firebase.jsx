@@ -1,8 +1,7 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 
+// Your Firebase configuration object
 const firebaseConfig = {
   apiKey: "AIzaSyDh0QAqKZfBmBbTZOIPaE2auWyEvfQJb3Y",
   authDomain: "oxygenkart-3c9ef.firebaseapp.com",
@@ -15,21 +14,23 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
-
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
+
+// Force account selection
+provider.setCustomParameters({
+  prompt: "select_account",
+});
 
 export const authWithGoogle = async () => {
   let user = null;
 
-  await signInWithPopup(auth, provider)
-    .then((result) => {
-      user = result.user;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  try {
+    const result = await signInWithPopup(auth, provider);
+    user = result.user;
+  } catch (error) {
+    console.log(error);
+  }
 
   return user;
 };
