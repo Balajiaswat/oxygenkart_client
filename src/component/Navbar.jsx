@@ -108,6 +108,7 @@ function Navbar({ courseRef, contactUsRef, intradayRef, homeRef }) {
         {
           method: "GET",
           headers: {
+            // Correct the Authorization header to use 'Bearer' token
             Authorization: `${token}`,
           },
         }
@@ -118,6 +119,7 @@ function Navbar({ courseRef, contactUsRef, intradayRef, homeRef }) {
         localStorage.removeItem("token");
         setLoading(false);
         setLoggedIn(false);
+        // Optionally navigate to the login page after logout
         // setTimeout(() => {
         //   navigate("/login");
         // }, 2000);
