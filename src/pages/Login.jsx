@@ -93,12 +93,12 @@ const Login = () => {
 
       // Handle the response
       const data = await res.json();
+
       if (res.ok) {
-        console.log("Login successful:", data);
         localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("token", user.accessToken); // Assuming the token is in responseData
-        localStorage.setItem("userId", data._id); // Assuming userId is available as '_id'
-        localStorage.setItem("username", data.username); // Assuming username is available
+        localStorage.setItem("token", data.token); // Assuming the token is in responseData
+        localStorage.setItem("userId", data.user._id); // Assuming userId is available as '_id'
+        localStorage.setItem("username", data.user.username); // Assuming username is available
 
         // Optional: Redirect to the homepage or a different page
         window.location.href = "/";

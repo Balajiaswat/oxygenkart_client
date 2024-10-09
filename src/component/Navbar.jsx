@@ -129,7 +129,7 @@ function Navbar({ courseRef, contactUsRef, intradayRef, homeRef }) {
       }
     } catch (error) {
       // toast.error("An error occurred while logging out.");
-      console.error("Logout error:", error);
+      console.error("Logout error:", error.message);
     } finally {
       setLoading(false);
     }
