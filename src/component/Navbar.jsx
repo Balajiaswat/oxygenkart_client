@@ -125,10 +125,10 @@ function Navbar({ courseRef, contactUsRef, intradayRef, homeRef }) {
         // }, 2000);
       } else {
         const errorData = await response.json();
-        toast.error(`Logout failed: ${errorData.message || "Unknown error"}`);
+        // toast.error(`Logout failed: ${errorData.message || "Unknown error"}`);
       }
     } catch (error) {
-      toast.error("An error occurred while logging out.");
+      // toast.error("An error occurred while logging out.");
       console.error("Logout error:", error);
     } finally {
       setLoading(false);
