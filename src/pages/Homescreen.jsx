@@ -18,7 +18,6 @@ function Homescreen() {
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigate();
-
   const contactUsRef = useRef(null);
   const courseRef = useRef(null);
   const intradayRef = useRef(null);
@@ -37,7 +36,9 @@ function Homescreen() {
       toast.error("You are not logged in");
       return;
     }
+
     try {
+      // 1. Fetch order details from your backend
       const response = await fetch(
         `https://oxygenkart-backend.onrender.com/courseOrder/buy/${courseId}`,
         {
@@ -47,9 +48,78 @@ function Homescreen() {
           },
         }
       );
+
       if (response.ok) {
         const data = await response.json();
-        toast.success("Course purchased successfully!");
+        const { razorpay_order_id, amount, currency } = data; // Update to match your response
+
+        // 2. Dynamically load the Razorpay Checkout script
+        const loadScript = (src) => {
+          return new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = src;
+            script.onload = () => resolve(true);
+            script.onerror = () => resolve(false);
+            document.body.appendChild(script);
+          });
+        };
+
+        const scriptLoaded = await loadScript(
+          "https://checkout.razorpay.com/v1/checkout.js"
+        );
+
+        if (!scriptLoaded) {
+          toast.error("Razorpay SDK failed to load. Are you online?");
+          return;
+        }
+
+        // 3. Configure Razorpay options
+        const options = {
+          key: "rzp_live_ZKgDtSQ2sM0im6", // Replace with your actual Razorpay test/live key
+          amount: amount, // Amount is in paise
+          currency: currency,
+          name: "OxygenKart",
+          description: "Purchase of Course",
+          order_id: razorpay_order_id, // Razorpay Order ID from backend
+          handler: async function (response) {
+            // Handle payment success
+            const { razorpay_payment_id, razorpay_signature } = response;
+
+            // Verify payment with your backend
+            const verificationResponse = await fetch(
+              `https://oxygenkart-backend.onrender.com/courseOrder/courseVerifyPayment`, // Your verification endpoint
+              {
+                method: "POST",
+                headers: {
+                  Authorization: token,
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  razorpay_order_id: razorpay_order_id,
+                  razorpay_payment_id: razorpay_payment_id,
+                  razorpay_signature: razorpay_signature,
+                  amount: amount,
+                }),
+              }
+            );
+
+            if (verificationResponse.ok) {
+              toast.success("Payment successful and verified!");
+            } else {
+              toast.error("Payment verified failed.");
+            }
+          },
+          prefill: {
+            name: localStorage.getItem("username"),
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+
+        // 4. Open the Razorpay payment modal
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
       } else {
         toast.error("Failed to purchase course.");
       }
@@ -102,18 +172,135 @@ function Homescreen() {
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   };
 
-  const toggleChatBox = () => {
+  const toggleChatBox = async () => {
     if (!token) {
       toast.error("You are not logged in!");
       setTimeout(() => {
         navigation("/login");
       }, 3000);
-    } else {
-      setShowChatBox((prevShowChatBox) => {
-        return !prevShowChatBox;
-      });
+      return; // Exit early if not logged in
+    }
+
+    // Step 1: Check user's payment status
+    try {
+      const paymentCheckResponse = await fetch(
+        `https://oxygenkart-backend.onrender.com/payment/check-payment`, // Endpoint to check payment status
+        {
+          method: "GET",
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      const paymentCheckData = await paymentCheckResponse.json();
+
+      if (paymentCheckResponse.ok) {
+        // Step 2: If payment is true, open the chat box
+        if (paymentCheckData.payment) {
+          setShowChatBox((prevShowChatBox) => !prevShowChatBox);
+        } else {
+          // Step 3: If payment is false, proceed with Razorpay payment
+          const response = await fetch(
+            `https://oxygenkart-backend.onrender.com/payment/create-order`, // Your create order endpoint
+            {
+              method: "POST",
+              headers: {
+                Authorization: token,
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ amount: 5 }), // Amount of ₹5
+            }
+          );
+
+          const orderData = await response.json();
+
+          if (response.ok) {
+            // Dynamically load the Razorpay Checkout script
+            const scriptLoaded = await loadScript(
+              "https://checkout.razorpay.com/v1/checkout.js"
+            );
+
+            if (!scriptLoaded) {
+              toast.error("Razorpay SDK failed to load. Are you online?");
+              return;
+            }
+
+            // Configure Razorpay options
+            const options = {
+              key: "rzp_live_ZKgDtSQ2sM0im6", // Replace with your actual Razorpay test/live key
+              amount: orderData.order.amount, // Amount is in paise
+              currency: orderData.order.currency,
+              name: "OxygenKart",
+              description: "Purchase of Order",
+              order_id: orderData.order.id, // Razorpay Order ID from backend
+              handler: async (paymentResponse) => {
+                const { razorpay_payment_id, razorpay_signature } =
+                  paymentResponse;
+
+                // Verify payment with your backend
+                const verificationResponse = await fetch(
+                  `http://localhost:8080/payment/verify-payment`, // Your verification endpoint
+                  {
+                    method: "POST",
+                    headers: {
+                      Authorization: token,
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      razorpay_order_id: orderData.order.id,
+                      razorpay_payment_id: razorpay_payment_id,
+                      razorpay_signature: razorpay_signature,
+                      amount: orderData.order.amount,
+                    }),
+                  }
+                );
+
+                if (verificationResponse.ok) {
+                  toast.success("Payment successful and verified!");
+                  setShowChatBox(true); // Open chat box after successful payment
+                } else {
+                  toast.error("Payment verification failed.");
+                }
+              },
+              prefill: {
+                name: localStorage.getItem("username"),
+                // Include other user details if needed
+              },
+              theme: {
+                color: "#3399cc",
+              },
+            };
+
+            // Open the Razorpay payment modal
+            const razorpay = new window.Razorpay(options);
+            razorpay.open(); // Open the Razorpay payment modal
+          } else {
+            toast.error("Failed to create order. Please try again.");
+            console.error("Error creating order:", orderData);
+          }
+        }
+      } else {
+        toast.error("Failed to check payment status.");
+        console.error("Error checking payment status:", paymentCheckData);
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again.");
+      console.error("Error:", error);
     }
   };
+
+  // Helper function to dynamically load the Razorpay Checkout script
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
   return (
     <>
       <Chck />
