@@ -118,6 +118,7 @@ function ChatBox({ showChatBox, setShowChatBox, toggleChatBox }) {
         const data = await response.json();
         if (latestNotificationTime.current) {
           const newNotificationTime = new Date(data.notification.date);
+
           if (
             newNotificationTime > latestNotificationTime.current &&
             (!showChatBox || document.hidden)
@@ -125,13 +126,22 @@ function ChatBox({ showChatBox, setShowChatBox, toggleChatBox }) {
             notifyUser("New notification received");
           } else if (
             newNotificationTime > latestNotificationTime.current &&
-            showChatBox
+            showChatBox &&
+            !document.hidden && // Check if the document is visible
+            userHasInteracted.current // Check if user has interacted
           ) {
-            messageAudioRef.current.play();
+            messageAudioRef.current.play().catch((error) => {
+              console.log("Audio play failed: ", error);
+            });
           }
+
           latestNotificationTime.current = newNotificationTime;
         } else if (data.notification.date) {
-          messageAudioRef.current.play();
+          if (!document.hidden && userHasInteracted.current) {
+            messageAudioRef.current.play().catch((error) => {
+              console.log("Audio play failed: ", error);
+            });
+          }
           latestNotificationTime.current = new Date(data.notification.date);
         }
         setNotification(data.notification);
@@ -140,6 +150,20 @@ function ChatBox({ showChatBox, setShowChatBox, toggleChatBox }) {
       console.log(error);
     }
   };
+
+  // Track if user has interacted with the page
+  const userHasInteracted = useRef(false);
+  useEffect(() => {
+    const handleUserInteraction = () => {
+      userHasInteracted.current = true;
+    };
+
+    document.addEventListener("click", handleUserInteraction);
+
+    return () => {
+      document.removeEventListener("click", handleUserInteraction);
+    };
+  }, []);
 
   const fetchUser = async () => {
     try {

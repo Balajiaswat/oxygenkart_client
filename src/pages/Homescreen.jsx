@@ -240,7 +240,7 @@ function Homescreen() {
 
                 // Verify payment with your backend
                 const verificationResponse = await fetch(
-                  `http://localhost:8080/payment/verify-payment`, // Your verification endpoint
+                  `https://oxygenkart-backend.onrender.com/payment/verify-payment`, // Your verification endpoint
                   {
                     method: "POST",
                     headers: {
