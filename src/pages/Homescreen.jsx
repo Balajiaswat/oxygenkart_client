@@ -281,7 +281,7 @@ function Homescreen() {
           }
         }
       } else {
-        toast.error("Failed to check payment status.");
+        toast.error("You are not logged in!");
         console.error("Error checking payment status:", paymentCheckData);
       }
     } catch (error) {
