@@ -11,6 +11,7 @@ import ContactUs from "../component/ContactUs";
 import ChatBox from "./ChatBox";
 import Chck from "./Chck";
 import Footer from "../component/Footer";
+import PopupModal from "../component/PopupModal";
 
 function Homescreen() {
   const [showChatBox, setShowChatBox] = useState(false);
@@ -310,6 +311,7 @@ function Homescreen() {
         homeRef={homeRef}
         courseRef={courseRef}
       />
+      <PopupModal />
       <section ref={homeRef} id="home-section" className="banner">
         <div className="banner-cont">
           <div ref={homeRef} id="home-section" className="bannerText">
