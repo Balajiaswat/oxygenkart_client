@@ -451,13 +451,13 @@ function Homescreen() {
                       )}
                     </div>
                     <div className="course-content-detail-div">
-                      <p className="course-text-content-p">
+                      {/* <p className="course-text-content-p">
                         {`${new Date(course.date).toLocaleDateString("en-US", {
                           year: "numeric",
                           month: "short",
                           day: "numeric",
                         })}`}
-                      </p>
+                      </p> */}
                       <h4 className="course-text-content-h4">{course.title}</h4>
                       <p className="course-text-content-p">
                         {course.description}

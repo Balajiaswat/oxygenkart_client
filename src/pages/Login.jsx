@@ -54,6 +54,18 @@ const Login = () => {
         localStorage.setItem("userId", responseData.user.userId);
         localStorage.setItem("username", responseData.user.username);
 
+        const loggedInUserId = responseData.user.userId;
+        await fetch(
+          `https://oxygenkart-backend.onrender.com/loggedInUser/user-login/${loggedInUserId}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `${responseData.token}`,
+            },
+          }
+        );
+
         navigate("/"); // Adjust this based on your routing setup
       }
     } catch (error) {
@@ -99,6 +111,17 @@ const Login = () => {
         localStorage.setItem("token", data.token); // Assuming the token is in responseData
         localStorage.setItem("userId", data.user._id); // Assuming userId is available as '_id'
         localStorage.setItem("username", data.user.username); // Assuming username is available
+        const loggedInUserId = data.user._id;
+        await fetch(
+          `https://oxygenkart-backend.onrender.com/loggedInUser/user-login/${loggedInUserId}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `${data.token}`,
+            },
+          }
+        );
 
         // Optional: Redirect to the homepage or a different page
         window.location.href = "/";
