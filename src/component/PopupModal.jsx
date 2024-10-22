@@ -14,14 +14,13 @@ const PopupModal = () => {
     <div className="modal-overlay" onClick={handleClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <p>
-          1. OxygenKart is not a SEBI Registered Organization; it houses
-          experienced traders who provide trading signals based on market
-          experience.
+          1. OxygenKart is not a SEBI-registered entity. It offers market
+          insights based on the opinions of experienced traders.
         </p>
-        <p>2. Please trade cautiously and responsibly.</p>
+        <p>2. We encourage you to trade with caution and responsibility.</p>
         <p>
-          3. OxygenKart or any of its members are not responsible for losses you
-          incurred.
+          3. OxygenKart and its members are not liable for any financial losses
+          incurred as a result of trading decisions.
         </p>
         <button className="understand-button" onClick={handleClose}>
           I Understand
