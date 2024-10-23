@@ -65,7 +65,7 @@ const Privacy = () => {
         <p>
           Oxygenkart is not registered with SEBI and does not take
           responsibility for any losses incurred based on the training material
-          or trading signals provided. All trading decisions are the user's
+          or experts opinion provided. All trading decisions are the user's
           responsibility.
         </p>
 
@@ -82,7 +82,7 @@ const Privacy = () => {
             The user must record a video demonstrating the technical issue and
             send it to support@oxygenkart.com.
           </li>
-          <li>No refunds will be provided for daily trading signals.</li>
+          <li>No refunds will be provided for experts opinion.</li>
         </ul>
 
         <h2>Security Precautions</h2>

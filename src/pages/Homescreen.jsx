@@ -350,11 +350,11 @@ function Homescreen() {
             {/* First icon */}
             <div className="intraday-box" onClick={tradinSignal}>
               <RiSignalTowerLine className="intraday-icon" />
-              <h4 className="intraday-h4">Accurate Trading Signals</h4>
+              <h4 className="intraday-h4">Ask the experts</h4>
               <p className="intraday-para">
-                Get real-time Buy and Sell signals tailored to help you make
-                profitable trades. Our advanced algorithms and expert analysis
-                ensure you stay ahead of the market.
+                Get experts opinion on Intraday Trading and limit your loses.
+                Experts market analysis will help you ace the market so that you
+                always stay ahead.
               </p>
             </div>
             {/* Second icon */}

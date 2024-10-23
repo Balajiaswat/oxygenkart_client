@@ -22,7 +22,7 @@ const TermsAndConditions = () => {
         <section>
           <h2>2. Trading Signals</h2>
           <p>
-            Our service provides accurate Buy and Sell signals for day trading.
+            Our experts opinion on intraday trades will help you limit loses.
             However, market behavior can be unpredictable. Therefore, you
             acknowledge and agree that:
           </p>

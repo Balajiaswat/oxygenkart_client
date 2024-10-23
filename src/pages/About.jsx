@@ -59,10 +59,10 @@ function About() {
               variants={slideIn}
             />
             <motion.p variants={fadeIn}>
-              Welcome to OxygenKart, your premier destination for accurate Buy
-              and Sell signals in day trading. Established to empower traders
-              with reliable market insights, our mission is to help you make
-              informed trading decisions and maximize your profits.
+              Welcome to OxygenKart, your premier destination to learn day
+              trading. Established to empower traders with reliable market
+              insights, our mission is to help you make informed trading
+              decisions and maximize your profits.
             </motion.p>
           </div>
         </motion.div>
@@ -81,7 +81,7 @@ function About() {
               </motion.h1>
               <motion.p variants={fadeIn}>
                 At OxygenKart, we aim to simplify day trading by providing
-                precise signals that guide your trades throughout the day. Our
+                experts opinion to guide your trades throughout the day. Our
                 goal is to enable traders, from beginners to experts, to achieve
                 financial success with confidence.
               </motion.p>
@@ -102,16 +102,14 @@ function About() {
                 What We Offer
               </motion.h1>
               <motion.p variants={fadeIn}>
-                Accurate Trading Signals: Get real-time Buy and Sell signals
-                tailored to help you make profitable trades. Our advanced
-                algorithms and expert analysis ensure you stay ahead of the
-                market. Comprehensive Day Trading Course: Learn the art of day
-                trading with our in-depth course. Available for purchase and
-                download, this course equips you with the skills and knowledge
-                to become self-sufficient in day trading. Latest Trading News:
-                Stay informed with up-to-date news and insights on market
-                trends, upcoming events, and key factors that could influence
-                your trading strategy.
+                Our advanced algorithms and expert analysis ensure you stay
+                ahead of the market. Comprehensive Day Trading Course: Learn the
+                art of day trading with our in-depth course. Available for
+                purchase and download, this course equips you with the skills
+                and knowledge to become self-sufficient in day trading. Latest
+                Trading News: Stay informed with up-to-date news and insights on
+                market trends, upcoming events, and key factors that could
+                influence your trading strategy.
               </motion.p>
             </motion.div>
           </div>
@@ -127,8 +125,8 @@ function About() {
           <motion.h1 variants={slideIn}>Why Choose OxygenKart?</motion.h1>
           <motion.p variants={fadeIn}>
             Expert Analysis: Our team of experienced traders and analysts
-            provides you with the best market insights and signals. Continuous
-            Updates: With daily updates on market behavior and potential trading
+            provides you with the best market insights. Continuous Updates: With
+            daily updates on market behavior and potential trading
             opportunities, you'll always be prepared for the next trading day.
           </motion.p>
         </motion.div>
@@ -142,8 +140,8 @@ function About() {
         >
           <motion.h1 variants={slideIn}>Our Values</motion.h1>
           <motion.p variants={fadeIn}>
-            Accuracy: We strive to provide the most reliable and precise trading
-            signals. Education: Empowering traders through knowledge and skill
+            Accuracy: We strive to provide the most reliable and precise expert
+            opinion. Education: Empowering traders through knowledge and skill
             development is at the heart of what we do. Integrity: We operate
             with transparency and honesty, ensuring you can trust the
             information and services we provide. Customer Focus: Your success is
