@@ -201,6 +201,19 @@ function Homescreen() {
         if (paymentCheckData.payment) {
           setShowChatBox((prevShowChatBox) => !prevShowChatBox);
         } else {
+          const now = new Date();
+          const startTime = new Date();
+          const endTime = new Date();
+
+          // Set the start and end times (in IST)
+          startTime.setHours(9, 0, 0); // 9:00 AM
+          endTime.setHours(15, 30, 0); // 3:30 PM
+
+          // If it's outside the allowed time range
+          if (now < startTime || now > endTime) {
+            setShowChatBox((prevShowChatBox) => !prevShowChatBox);
+            return; // Exit early
+          }
           // Step 3: If payment is false, proceed with Razorpay payment
           const response = await fetch(
             `https://oxygenkart-backend.onrender.com/payment/create-order`, // Your create order endpoint
